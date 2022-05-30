@@ -1,0 +1,16 @@
+# Template file for 'pitivi'
+pkgname=pitivi
+version=2021.05.0
+revision=1
+build_style=meson
+makedepends="gettext pkg-config python3-devel gstreamer1-devel
+ python3-cairo-devel desktop-file-utils appstream-glib itstool"
+depends="python3-cairo python3-gobject python3-matplotlib gst1-python3
+ gst1-editing-services gst-plugins-good1 gst-plugins-bad1 gst-libav"
+short_desc="Editor for audio/video projects using the GStreamer framework"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="LGPL-2.1-or-later"
+homepage="http://www.pitivi.org/"
+changelog="https://gitlab.gnome.org/GNOME/pitivi/-/raw/master/NEWS"
+distfiles="https://gitlab.gnome.org/GNOME/pitivi/-/archive/$version/pitivi-$version.tar.gz"
+checksum=7e0b7f1f7c9f0f57efe36aa723b2a260e97d19563530081a44091dbd7b488050
