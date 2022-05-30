@@ -1,0 +1,39 @@
+# Template file for 'wlroots-git'
+pkgname=wlroots-git
+version=20220928
+revision=1
+_commit=baf3fa27dc867e5c0e4515ec5f0ef6c0e4da0a4a
+wrksrc="wlroots-${_commit}"
+build_style=meson
+configure_args=" --auto-features=enabled -Dexamples=false
+ -Dwerror=false -Db_ndebug=false"
+_devel_depends="libgbm-devel libglvnd-devel libseat-devel
+ eudev-libudev-devel libdrm-devel libinput-devel libxkbcommon-devel
+ pixman-devel wayland-devel wayland-protocols vulkan-loader
+ Vulkan-Headers xcb-util-errors-devel xcb-util-wm-devel
+ xcb-util-renderutil-devel"
+hostmakedepends="pkg-config wayland-devel glslang"
+makedepends="${_devel_depends} libxcb-devel xcb-util-cursor-devel
+ xcb-util-devel xcb-util-image-devel xcb-util-keysyms-devel
+ xcb-util-xrm-devel xorg-server-xwayland"
+short_desc="Modular Wayland compositor library - git version"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="MIT"
+homepage="https://gitlab.freedesktop.org/wlroots/wlroots"
+distfiles="https://gitlab.freedesktop.org/wlroots/wlroots/-/archive/${_commit}/wlroots-${_commit}.tar.gz"
+checksum=e97b1e1d3fef239924a389eca14b150d0aa696ed13ec8f87eaf37fcf0142e704
+conflicts="wlroots"
+
+post_install() {
+	vlicense LICENSE
+}
+
+wlroots-git-devel_package() {
+	depends="${sourcepkg}>=${version}_${revision} ${_devel_depends}"
+	short_desc+=" - development files"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/pkgconfig
+		vmove "usr/lib/*.so"
+	}
+}
