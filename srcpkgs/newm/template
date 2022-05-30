@@ -1,0 +1,45 @@
+# Template file for 'newm'
+pkgname=newm
+version=0.3
+revision=1
+hostmakedepends="meson git pkg-config"
+makedepends="python3-devel wayland-devel wayland-protocols
+ libxkbcommon-devel libinput-devel pixman-devel libseat-devel
+ libxcb-devel xcb-util-wm-devel xcb-util-renderutil-devel
+ xorg-server-xwayland wlroots-devel"
+depends="wayland python3-evdev python3-imageio python3-numpy
+ python3-cairo python3-psutil python3-pam python3-pyfiglet
+ python3-dasbus python3-thefuzz"
+short_desc="Wayland compositor"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="MIT"
+homepage="https://github.com/jbuchermn/newm"
+
+do_fetch() {
+	# -b v0.3
+	git clone https://github.com/jbuchermn/pywm.git $wrksrc/pywm
+	git clone https://github.com/jbuchermn/newm.git $wrksrc/newm
+
+	cd $wrksrc/pywm
+	git submodule init
+	git submodule update
+}
+
+do_build() {
+	cd $wrksrc/pywm
+	meson build && ninja -C build
+	python3 setup.py build
+
+	cd $wrksrc/newm
+	python3 setup.py build
+}
+
+do_install() {
+	cd $wrksrc/pywm
+	python3 setup.py install --prefix=/usr --root=${DESTDIR}
+
+	cd $wrksrc/newm
+	python3 setup.py install --prefix=/usr --root=${DESTDIR}
+
+	#vlicense LICENSE
+}
