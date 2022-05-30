@@ -1,0 +1,31 @@
+# Template file for 'cardboard-git'
+pkgname=cardboard-git
+version=20220321
+revision=1
+_commit=b54758d85164fb19468f5ca52588ebea576cd027
+wrksrc="cardboard-${_commit}"
+build_style=meson
+configure_args="
+ --buildtype=release
+ --wrap-mode=default
+ -Dxwayland=disabled
+ -Dman=true
+ -Dwerror=false
+ -Db_ndebug=false
+"
+hostmakedepends="git pandoc pkg-config wayland-devel"
+makedepends="wlroots-devel"
+short_desc="Unique, scrollable tiling Wayland compositor"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="GPL-3.0-or-later"
+homepage="https://gitlab.com/cardboardwm/cardboard"
+distfiles="https://gitlab.com/cardboardwm/cardboard/-/archive/${_commit}/cardboard-${_commit}.tar.gz"
+checksum=1341e57f74dcb6a76655b42e276d6f96cdfb0de34e4023079c13846ecd9d4ff3
+
+#TODO: install msg for cardboardrc
+#TODO: don't use git to fetch the subprojects, ditch wrap
+#TODO: add subpkg -devel
+
+do_install() {
+	DESTDIR=${DESTDIR} meson install -C build --no-rebuild --skip-subprojects
+}
