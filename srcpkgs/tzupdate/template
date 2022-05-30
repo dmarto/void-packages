@@ -14,6 +14,6 @@ checksum=8e0f81d04143fd89a1300155bb99baeb46d5f6b3df49b96361f9026ff55eaec9
 # tests require httpretty, not in repos
 make_check=no
 
-post_instal() {
+post_install() {
 	vlicense LICENSE
 }
