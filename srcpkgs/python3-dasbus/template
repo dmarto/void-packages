@@ -1,0 +1,15 @@
+# Template file for 'python3-dasbus'
+pkgname=python3-dasbus
+version=1.6
+revision=1
+wrksrc="dasbus-${version}"
+build_style=python3-module
+makedepends="python3-setuptools"
+depends="python3-gobject dbus"
+checkdepends="python3-gobject dbus"
+short_desc="DBus library in Python 3"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="LGPL-2.1-only"
+homepage="https://github.com/rhinstaller/dasbus"
+distfiles="https://github.com/rhinstaller/dasbus/archive/v${version}.tar.gz"
+checksum=710617b229a9017b2d38b310b76fbac1a29976089cb8bfe4c01547dddb35d59e
