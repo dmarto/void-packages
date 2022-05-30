@@ -1,0 +1,25 @@
+# Template file for 'pcsc-abcccid'
+pkgname=pcsc-abcccid
+version=2.1.2
+revision=1
+wrksrc="Circle_Linux_Mac_Driver_v${version}"
+build_style=gnu-configure
+hostmakedepends="pkg-config perl unzip"
+makedepends="pcsclite-devel libusb-devel"
+depends="pcsclite"
+short_desc="PC/SC driver for AB Circle (Comitex, Idaxis) CCID smart card readers"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="LGPL-2.1-or-later"
+homepage="https://www.abcircle.co.jp/en/"
+distfiles="https://github.com/dmarto/void-packages/files/8550764/Circle_Linux_Mac_Driver_v2.1.2.zip"
+checksum=58512ee6c804e2ead38d473b5edc0961c9987c0382f5b4dce80adbcfddf49e46
+
+post_extract() {
+	bsdtar --strip-components=1 -xzf abcccid-${version}.tar.bz2
+}
+
+post_install() {
+	vinstall src/92_pcscd_abcccid.rules 644 usr/lib/udev/rules.d/
+	vdoc readers/supported_readers.txt
+	vdoc README.md
+}
