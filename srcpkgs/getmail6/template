@@ -1,6 +1,6 @@
 # Template file for 'getmail6'
 pkgname=getmail6
-version=6.18.10
+version=6.18.12
 revision=1
 build_style=python3-module
 hostmakedepends="python3-setuptools"
@@ -10,5 +10,5 @@ maintainer="Martin Dimov <martin@dmarto.com>"
 license="GPL-2.0-only"
 homepage="https://getmail6.org/"
 distfiles="https://github.com/getmail6/getmail6/archive/refs/tags/v${version}.tar.gz"
-checksum=0e5617cfa2cc87c5b259634f59f5728df3b2568a92caa564767e256f79866ad6
+checksum=419dc11184b147ef4daac2ec9f136b1b37e6450e2f44099629a6b7650deb044a
 conflicts="getmail"
