@@ -1,0 +1,46 @@
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -4201,16 +4201,21 @@ void nsWindow::OnEnterNotifyEvent(GdkEve
+   // when the pointer enters a child window.  If the destination window is a
+   // Gecko window then we'll catch the corresponding event on that window,
+   // but we won't notice when the pointer directly enters a foreign (plugin)
+   // child window without passing over a visible portion of a Gecko window.
+   if (aEvent->subwindow) {
+     return;
+   }
+ 
++  if (aEvent->mode == GDK_CROSSING_GRAB ||
++      aEvent->mode == GDK_CROSSING_UNGRAB) {
++    return;
++  }
++
+   // Check before checking for ungrab as the button state may have
+   // changed while a non-Gecko ancestor window had a pointer grab.
+   DispatchMissedButtonReleases(aEvent);
+ 
+   WidgetMouseEvent event(true, eMouseEnterIntoWidget, this,
+                          WidgetMouseEvent::eReal);
+ 
+   event.mRefPoint = GdkEventCoordsToDevicePixels(aEvent->x, aEvent->y);
+@@ -4279,16 +4284,21 @@ void nsWindow::OnLeaveNotifyEvent(GdkEve
+   //
+   // XXXkt However, we will miss toplevel exits when the pointer directly
+   // leaves a foreign (plugin) child window without passing over a visible
+   // portion of a Gecko window.
+   if (aEvent->subwindow) {
+     return;
+   }
+ 
++  if (aEvent->mode == GDK_CROSSING_GRAB ||
++      aEvent->mode == GDK_CROSSING_UNGRAB) {
++    return;
++  }
++
+   // The filter out for subwindows should make sure that this is targeted to
+   // this nsWindow.
+   const bool leavingTopLevel =
+       mWindowType == WindowType::TopLevel || mWindowType == WindowType::Dialog;
+ 
+   if (leavingTopLevel && IsBogusLeaveNotifyEvent(mGdkWindow, aEvent)) {
+     return;
+   }
