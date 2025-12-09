@@ -1,0 +1,18 @@
+# Template file for 'openrdap'
+pkgname=openrdap
+version=0.9.1
+revision=1
+build_style=go
+go_import_path="github.com/openrdap/rdap"
+go_package="${go_import_path}/cmd/rdap"
+short_desc="RDAP command line client"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="MIT"
+homepage="https://www.openrdap.org"
+distfiles="https://github.com/openrdap/rdap/archive/refs/tags/v${version}.tar.gz"
+checksum=06a330a9e7d87d89274a0bcedc5852b9f6a4df81baec438fdb6156f49068996d
+conflicts="icann-rdap-cli"
+
+post_install() {
+	vlicense LICENSE
+}
