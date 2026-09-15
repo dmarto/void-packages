@@ -1,7 +1,7 @@
 # Template file for 'ghostty'
 pkgname=ghostty
 version=1.1.3
-revision=1
+revision=2
 build_style=zig-build
 configure_args="
  -Doptimize=ReleaseFast
