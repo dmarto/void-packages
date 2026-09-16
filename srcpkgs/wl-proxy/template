@@ -1,0 +1,26 @@
+# Template file for 'wl-proxy'
+pkgname=wl-proxy
+version=0.1.4
+revision=1
+build_style=cargo
+makedepends="libdrm-devel sqlite-devel"
+short_desc="Proxy Wayland connections and intercept and manipulate Wayland messages"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="GPL-3.0-only"
+homepage="https://github.com/mahkoh/wl-proxy"
+distfiles="https://github.com/mahkoh/wl-proxy/archive/v${version}.tar.gz"
+checksum=2172ef5cfd0b9c135da7561157260aced7ba5a208197800856949200ffc6033e
+make_check=no # acceptor/state (and other) tests
+
+do_install() {
+	for bin in \
+		log-dmabuf-feedback \
+		window-to-tray \
+		wl-cm-filter \
+		wl-format-filter \
+		wl-paper \
+		wl-veil
+	do
+		vbin "target/${RUST_TARGET}/release/${bin}"
+	done
+}
