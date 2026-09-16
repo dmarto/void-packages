@@ -1,0 +1,19 @@
+# Template file for 'vellum'
+
+pkgname=vellum
+version=0.7.0
+revision=1
+build_style=cargo
+hostmakedepends="pkg-config"
+makedepends="wayland-devel libxkbcommon-devel fontconfig-devel vulkan-loader-devel"
+short_desc="Live screen annotation overlay for Wayland"
+maintainer="Martin Dimov <martin@dmarto.com>"
+license="MIT AND ISC"
+homepage="https://github.com/greyxp1/vellum"
+distfiles="https://github.com/greyxp1/vellum/archive/refs/tags/v${version}.tar.gz"
+checksum=b0ee41f2f225b8893576d16ad76017f0b233c3a81de399a22ad7effb1ea5823e
+
+do_install() {
+	vbin target/${RUST_TARGET}/release/vellum
+	vlicense LICENSE
+}
