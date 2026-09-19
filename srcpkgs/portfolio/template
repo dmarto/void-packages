@@ -1,0 +1,19 @@
+# Template file for 'portfolio'
+pkgname=portfolio
+version=1.0.3
+revision=1
+build_style=meson
+hostmakedepends="gettext glib-devel pkg-config python3"
+makedepends="libadwaita-devel"
+depends="libadwaita python3-gobject"
+checkdepends="appstream-glib desktop-file-utils"
+short_desc="Minimalist file manager for Linux mobile devices"
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/tchx84/Portfolio"
+distfiles="https://github.com/tchx84/Portfolio/archive/refs/tags/v${version}.tar.gz"
+checksum=d647b42d0d3aaa19260468ed9cf2e20745f3d8b6279356a28f79a7eeb0dd61b3
+
+post_install() {
+	ln -s dev.tchx84.Portfolio "${DESTDIR}/usr/bin/portfolio"
+}
